@@ -9,6 +9,11 @@
       <v-spacer></v-spacer>
     </v-app-bar>
 
+    <v-navigation-drawer>
+        <h1>gat</h1>
+
+    </v-navigation-drawer>
+
     <v-container>
       <v-content>
         <v-layout row wrap>

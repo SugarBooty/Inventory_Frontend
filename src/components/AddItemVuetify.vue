@@ -20,13 +20,18 @@
           <v-spacer></v-spacer>
 
           <v-flex xs12 sm6>
-            <v-text-field
+            <v-combobox
               v-model="item.tags"
+              :items="item.tags"
+              small-chips
               label="Tags"
-              required
+              multiple
+              single-line
               dense
               outlined
-            ></v-text-field>
+              loading='primary'
+              clearable
+            ></v-combobox>
           </v-flex>
 
           <v-flex sm12>
@@ -87,11 +92,12 @@ export default {
     //     v => !!v || 'Field is required!'
     // ]
     return {
+        load: true,
       item: {
         name: "",
         desc: "",
         location: "",
-        tags: [],
+        tags: [ 'for', 'you', 'i', 'no' ],
       },
       rules: {
         required: (v) => !!v || "Required",
