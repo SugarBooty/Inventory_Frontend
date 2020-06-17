@@ -1,7 +1,16 @@
 <template>
   <v-form @submit.prevent="handleSubmit">
     <v-card class="pa-2">
-      <v-card-title>Add New Item</v-card-title>
+      <v-card-title>
+        Add New Item
+        <v-spacer></v-spacer>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon v-bind="attrs" v-on="on">mdi-help-circle-outline</v-icon>
+          </template>
+          This is the help tooltip
+        </v-tooltip>
+      </v-card-title>
 
       <v-card-text>
         <v-layout row wrap>
@@ -10,7 +19,6 @@
               v-model="item.name"
               class="leftAlign"
               label="Item Name"
-              :rules="required"
               dense
               outlined
             >
@@ -29,12 +37,12 @@
               single-line
               dense
               outlined
-              loading='primary'
+              loading="primary"
               clearable
             ></v-combobox>
           </v-flex>
 
-          <v-flex sm12>
+          <v-flex xs10 sm10>
             <v-text-field
               v-model="item.location"
               label="Location"
@@ -42,6 +50,17 @@
               dense
               outlined
             ></v-text-field>
+          </v-flex>
+
+          <v-flex xs2>
+            <v-text-field
+              v-model="item.quantity"
+              label="Qty"
+              required
+              dense
+              outlined
+            >
+            </v-text-field>
           </v-flex>
 
           <v-flex sm12>
@@ -59,11 +78,11 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn type="submit" color="primary">
-          <v-icon class="mr-1">mdi-check-circle-outline</v-icon>
+          <v-icon left>mdi-check-circle-outline</v-icon>
           Submit
         </v-btn>
         <v-btn @click="clearFields">
-          <v-icon class="mr-1">mdi-backspace-outline</v-icon>
+          <v-icon left>mdi-backspace-outline</v-icon>
           Clear
         </v-btn>
       </v-card-actions>
@@ -72,48 +91,37 @@
 </template>
 
 <script>
-//   export default {
-//      return item: {
-//           name: '',
-//           description: '',
-//           location: '',
-//           type: '',
-//       },
-//       nameRules: [
-//         v => !!v || 'Name is required',
-//       ],
-//     },
-//   }
-
 export default {
   name: "add-item-vueify",
   data() {
-    // nameRules: [
-    //     v => !!v || 'Field is required!'
-    // ]
     return {
-        load: true,
+      load: true,
       item: {
         name: "",
         desc: "",
         location: "",
-        tags: [ 'for', 'you', 'i', 'no' ],
+        tags: [],
+        quantity: "",
       },
-      rules: {
-        required: (v) => !!v || "Required",
-      },
+      // rules: {
+      //   required: (v) => !!v || "Required",
+      // },
     };
   },
   methods: {
     handleSubmit() {
       this.$emit("add:item", this.item);
+      console.log("in AddItem: ");
+      console.log(this.item);
       this.clearFields();
     },
+
     clearFields() {
       this.item.name = "";
       this.item.desc = "";
       this.item.location = "";
       this.item.tags = [];
+      this.item.quantity = "";
     },
   },
 };

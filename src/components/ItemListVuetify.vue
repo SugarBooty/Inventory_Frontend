@@ -26,6 +26,7 @@ export default {
         { text: "Description", value: "desc" },
         { text: "Location", value: "location" },
         { text: "Tags", value: "tags" },
+        { text: "Qty", value: "quantity" },
       ],
     };
   },
